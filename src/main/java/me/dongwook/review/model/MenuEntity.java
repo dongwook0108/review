@@ -8,11 +8,13 @@ import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Entity
 @Builder
+@Getter
 @AllArgsConstructor
 @Table(name = "menu")
 public class MenuEntity {

@@ -1,8 +1,12 @@
 package me.dongwook.review.api;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import me.dongwook.review.api.request.CreateAndEditRestaurantRequest;
-import me.dongwook.review.model.RestaurantEntity;
+import me.dongwook.review.api.response.RestaurantDetailView;
+import me.dongwook.review.api.response.RestaurantDetailView.Menu;
+import me.dongwook.review.api.response.RestaurantView;
 import me.dongwook.review.service.RestaurantService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,15 +23,15 @@ public class RestaurantApi {
     private final RestaurantService restaurantService;
 
     @GetMapping("/restaurants")
-    public String getRestaurants() {
-        return "This is getRestaurants";
+    public List<RestaurantView> getRestaurants() {
+        return restaurantService.getAllRestaurants();
     }
 
     @GetMapping("/restaurant/{restaurantId}")
-    public String getRestaurant(
+    public RestaurantDetailView getRestaurant(
             @PathVariable Long restaurantId
     ) {
-        return "This is getRestaurant, " + restaurantId;
+        return restaurantService.getRestaurantDetail(restaurantId);
     }
 
     @PostMapping("/restaurant")
