@@ -1,6 +1,9 @@
 package me.dongwook.review.api;
 
+import lombok.RequiredArgsConstructor;
 import me.dongwook.review.api.request.CreateAndEditRestaurantRequest;
+import me.dongwook.review.model.RestaurantEntity;
+import me.dongwook.review.service.RestaurantService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequiredArgsConstructor
 public class RestaurantApi {
+
+    private final RestaurantService restaurantService;
 
     @GetMapping("/restaurants")
     public String getRestaurants() {
@@ -25,27 +31,25 @@ public class RestaurantApi {
     }
 
     @PostMapping("/restaurant")
-    public String createRestaurant(
+    public void createRestaurant(
             @RequestBody CreateAndEditRestaurantRequest request
     ) {
-        return "This is createRestaurant, name=" + request.getName() + " address="
-                + request.getAddress() + " menu name=" + request.getMenus().get(0).getName()
-                + " menu price=" + request.getMenus().get(0).getPrice();
+        restaurantService.createRestaurant(request);
     }
 
     @PutMapping("/restaurant/{restaurantId}")
-    public String updateRestaurant(
+    public void updateRestaurant(
             @PathVariable Long restaurantId,
             @RequestBody CreateAndEditRestaurantRequest request
     ) {
-        return "This is editRestaurant, " + restaurantId + " name=" + request.getName()
-                + " address=" + request.getAddress();
+        restaurantService.editRestaurant(restaurantId, request);
+
     }
 
     @DeleteMapping("/restaurant/{restaurantId}")
-    public String deleteRestaurant(
+    public void deleteRestaurant(
             @PathVariable Long restaurantId) {
-        return "This is deleteRestaurant, " + restaurantId;
+        restaurantService.deleteRestaurant(restaurantId);
     }
 
 
