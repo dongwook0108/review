@@ -1,11 +1,9 @@
 package me.dongwook.review.api;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import me.dongwook.review.api.request.CreateAndEditRestaurantRequest;
 import me.dongwook.review.api.response.RestaurantDetailView;
-import me.dongwook.review.api.response.RestaurantDetailView.Menu;
 import me.dongwook.review.api.response.RestaurantView;
 import me.dongwook.review.service.RestaurantService;
 import org.springframework.web.bind.annotation.DeleteMapping;
